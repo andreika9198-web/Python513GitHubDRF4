@@ -22,3 +22,12 @@ class ContentPagination(SectionPagination):
     - page_size: 5 записей на страницу по умолчанию
     """
     page_size = 5
+
+
+class QuestionPagination(SectionPagination):
+    """
+    Пагинация для вопросов (Question).
+    Наследуется от SectionPagination.
+    Отображает по 5 вопросов на страницу.
+    """
+    page_size = 5
