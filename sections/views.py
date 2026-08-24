@@ -104,4 +104,4 @@ class ContentDestroyAPIView(DestroyAPIView):
     """
     serializer_class = ContentSerializer
     queryset = Content.objects.all()
-    permission_classes = (IsAuthenticated, IsSuperuser)
+    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
