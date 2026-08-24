@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'drf_yasg',
+
+    # Project apps
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +133,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',  # папка для разработки
 ]
 
+AUTH_USER_MODEL = 'users.User'
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
