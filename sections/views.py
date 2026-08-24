@@ -58,3 +58,50 @@ class SectionDestroyAPIView(DestroyAPIView):
     serializer_class = SectionSerializer
     queryset = Section.objects.all()
     # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+
+class ContentListAPIView(ListAPIView):
+    """
+    Представление для получения списка всего контента.
+    Доступно всем пользователям (включая неавторизованных).
+    Поддерживает пагинацию.
+    """
+    serializer_class = ContentListSerializer
+    queryset = Content.objects.all()
+    # permission_classes = (IsAuthenticated,)
+    pagination_class = ContentPagination
+
+
+class ContentCreateAPIView(CreateAPIView):
+    """
+    Представление для создания нового контента.
+    Доступно только авторизованным пользователям с правами модератора или администратора.
+    """
+    serializer_class = ContentSerializer
+    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+
+class ContentRetrieveAPIView(RetrieveAPIView):
+    """
+    Представление для просмотра детальной информации о конкретном контенте.
+    Доступно всем пользователям (включая неавторизованных).
+    """
+    serializer_class = ContentSerializer
+    queryset = Content.objects.all()
+    # permission_classes = (IsAuthenticated,)
+
+class ContentUpdateAPIView(UpdateAPIView):
+    """
+    Представление для обновления данных контента.
+    Доступно только авторизованным пользователям с правами модератора или администратора.
+    """
+    serializer_class = ContentSerializer
+    queryset = Content.objects.all()
+    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+
+class ContentDestroyAPIView(DestroyAPIView):
+    """
+    Представление для удаления контента.
+    Доступно только авторизованным суперпользователям.
+    """
+    serializer_class = ContentSerializer
+    queryset = Content.objects.all()
+    permission_classes = (IsAuthenticated, IsSuperuser)
