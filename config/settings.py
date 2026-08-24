@@ -153,7 +153,7 @@ REST_FRAMEWORK = {
 
     # Настройка аутентификации - использование JWT токенов для авторизации
     # Пользователи получают токен при входе и передают его в заголовке Authorization
-    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.simplejwt.authentication.JWTAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
 
     # Настройка прав доступа - AllowAny означает, что API доступно всем (даже без регистрации)
     # Для продакшена нужно заменить на IsAuthenticated

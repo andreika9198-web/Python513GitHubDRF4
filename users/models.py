@@ -28,4 +28,4 @@ class User(AbstractUser):
     class Meta:
         verbose_name = _('User')
         verbose_name_plural = _('Users')
-        ordering = ['last_name', 'first_name']
+        ordering = ['id', 'last_name', 'first_name']
