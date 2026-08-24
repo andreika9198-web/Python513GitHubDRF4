@@ -17,7 +17,7 @@ class SectionListAPIView(ListAPIView):
     """
     serializer_class = SectionListSerializer
     queryset = Section.objects.all()
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     pagination_class = SectionPagination
 
 
@@ -27,7 +27,7 @@ class SectionCreateAPIView(CreateAPIView):
     Доступно только авторизованным пользователям с правами модератора или администратора.
     """
     serializer_class = SectionSerializer
-    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+    permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
 
 class SectionRetrieveAPIView(RetrieveAPIView):
@@ -37,7 +37,7 @@ class SectionRetrieveAPIView(RetrieveAPIView):
     """
     serializer_class = SectionSerializer
     queryset = Section.objects.all()
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
 
 class SectionUpdateAPIView(UpdateAPIView):
@@ -47,7 +47,7 @@ class SectionUpdateAPIView(UpdateAPIView):
     """
     serializer_class = SectionSerializer
     queryset = Section.objects.all()
-    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+    permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
 
 class SectionDestroyAPIView(DestroyAPIView):
@@ -57,7 +57,7 @@ class SectionDestroyAPIView(DestroyAPIView):
     """
     serializer_class = SectionSerializer
     queryset = Section.objects.all()
-    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+    permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
 class ContentListAPIView(ListAPIView):
     """
@@ -67,7 +67,7 @@ class ContentListAPIView(ListAPIView):
     """
     serializer_class = ContentListSerializer
     queryset = Content.objects.all()
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     pagination_class = ContentPagination
 
 
@@ -77,7 +77,7 @@ class ContentCreateAPIView(CreateAPIView):
     Доступно только авторизованным пользователям с правами модератора или администратора.
     """
     serializer_class = ContentSerializer
-    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+    permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
 class ContentRetrieveAPIView(RetrieveAPIView):
     """
@@ -86,7 +86,7 @@ class ContentRetrieveAPIView(RetrieveAPIView):
     """
     serializer_class = ContentSerializer
     queryset = Content.objects.all()
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
 class ContentUpdateAPIView(UpdateAPIView):
     """
@@ -95,7 +95,7 @@ class ContentUpdateAPIView(UpdateAPIView):
     """
     serializer_class = ContentSerializer
     queryset = Content.objects.all()
-    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+    permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
 class ContentDestroyAPIView(DestroyAPIView):
     """
@@ -104,7 +104,7 @@ class ContentDestroyAPIView(DestroyAPIView):
     """
     serializer_class = ContentSerializer
     queryset = Content.objects.all()
-    # permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+    permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
 class QuestionListAPIView(ListAPIView):
     """
@@ -114,7 +114,7 @@ class QuestionListAPIView(ListAPIView):
     """
     serializer_class = QuestionSerializer
     queryset = Question.objects.all()
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     pagination_class = QuestionPagination
 
 class QuestionRetrieveAPIView(RetrieveAPIView):
@@ -124,7 +124,7 @@ class QuestionRetrieveAPIView(RetrieveAPIView):
     """
     serializer_class = QuestionSectionSerializer
     queryset = Question.objects.all()
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         """

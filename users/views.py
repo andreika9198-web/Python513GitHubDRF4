@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from users.models import User
 from users.user_serializers import UserSerializer, UserCreateSerializer, UserTokenObtainPairSerializer, UserUpdateSerializer
+from sections.permissions import IsModerator, IsSuperuser
+
 
 class UserListAPIView(ListAPIView):
     """
@@ -12,7 +14,7 @@ class UserListAPIView(ListAPIView):
     """
     queryset = User.objects.all()  # Запрос ко всем пользователям в БД
     serializer_class = UserSerializer  # Сериализатор для преобразования данных
-    # permission_classes = [IsAuthenticated]  # Добавить для ограничения доступа
+    permission_classes = (IsAuthenticated, IsSuperuser|IsModerator) # Добавить для ограничения доступа
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -32,7 +34,7 @@ class UserRetrieveAPIView(RetrieveAPIView):
     """
     queryset = User.objects.all()  # Запрос ко всем пользователям
     serializer_class = UserSerializer  # Сериализатор для отображения данных
-    permission_classes = (AllowAny,)  # Разрешаем доступ всем пользователям
+    permission_classes = (IsAuthenticated,)
 
 
 class UserUpdateAPIView(UpdateAPIView):
@@ -42,11 +44,11 @@ class UserUpdateAPIView(UpdateAPIView):
     """
     queryset = User.objects.all()  # Запрос ко всем пользователям
     serializer_class = UserUpdateSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
-    # def get_object(self):
-    #    user = self.request.user
-    #    return User.objects.filter(id=user.id)
+    def get_object(self):
+       user = self.request.user
+       return User.objects.filter(id=user.id)
 
 class UserDestroyAPIView(DestroyAPIView):
     """
@@ -54,7 +56,7 @@ class UserDestroyAPIView(DestroyAPIView):
     Доступно всем пользователям (включая неавторизованных).
     """
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated, IsSuperuser)
 
 
 class UserTokenObtainPairView(TokenObtainPairView):
@@ -63,3 +65,4 @@ class UserTokenObtainPairView(TokenObtainPairView):
     Доступно всем пользователям (включая неавторизованных).
     """
     serializer_class = UserTokenObtainPairSerializer
+    permission_classes = (AllowAny,)
