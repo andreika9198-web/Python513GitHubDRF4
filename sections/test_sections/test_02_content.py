@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from sections.test_sections.utils import get_admin_user, get_member_user, get_test_section,get_test_content
+from sections.test_sections.utils import get_admin_user, get_member_user,get_test_content
 
 
 class ContentTestAdmin(APITestCase):
