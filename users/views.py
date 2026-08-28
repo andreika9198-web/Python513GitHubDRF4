@@ -14,7 +14,8 @@ class UserListAPIView(ListAPIView):
     """
     queryset = User.objects.all()  # Запрос ко всем пользователям в БД
     serializer_class = UserSerializer  # Сериализатор для преобразования данных
-    permission_classes = (IsAuthenticated, IsSuperuser|IsModerator) # Добавить для ограничения доступа
+    # Добавить для ограничения доступа
+    permission_classes = (IsAuthenticated, IsSuperuser | IsModerator)
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -23,7 +24,8 @@ class UserCreateAPIView(CreateAPIView):
     Доступно всем (включая неавторизованных).
     """
     queryset = User.objects.all()  # Запрос ко всем пользователям
-    serializer_class = UserCreateSerializer  # Сериализатор для создания пользователя
+    # Сериализатор для создания пользователя
+    serializer_class = UserCreateSerializer
     permission_classes = [AllowAny]  # Разрешаем доступ всем пользователям
 
 
@@ -47,8 +49,9 @@ class UserUpdateAPIView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_object(self):
-       user = self.request.user
-       return User.objects.filter(id=user.id)
+        user = self.request.user
+        return User.objects.filter(id=user.id)
+
 
 class UserDestroyAPIView(DestroyAPIView):
     """

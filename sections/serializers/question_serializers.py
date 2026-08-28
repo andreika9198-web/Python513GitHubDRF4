@@ -4,12 +4,14 @@ from rest_framework.fields import CharField
 
 from sections.models import Question, Section
 
+
 class QuestionSerializer(ModelSerializer):
     """
     Сериализатор для модели Question (базовый).
     Используется для отображения вопроса с названием раздела.
     """
-    section = SlugRelatedField(slug_field='title', queryset=Section.objects.all())
+    section = SlugRelatedField(
+        slug_field='title', queryset=Section.objects.all())
 
     class Meta:
         model = Question
@@ -21,7 +23,8 @@ class QuestionSectionSerializer(ModelSerializer):
     Сериализатор для модели Question (расширенный).
     Используется для отображения вопроса с названием раздела и ответом пользователя.
     """
-    section = SlugRelatedField(slug_field='title', queryset=Section.objects.all())
+    section = SlugRelatedField(
+        slug_field='title', queryset=Section.objects.all())
     member_answer = CharField()
 
     class Meta:

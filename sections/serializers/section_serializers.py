@@ -4,6 +4,7 @@ from rest_framework.fields import SerializerMethodField
 from sections.models import Section, Content
 from sections.serializers.content_serializers import ContentSectionSerializer
 
+
 class SectionSerializer(ModelSerializer):
     """
     Полный сериализатор для модели Section.

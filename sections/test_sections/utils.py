@@ -1,6 +1,7 @@
 from users.models import User, UserRoles
 from sections.models import Section, Content, Question
 
+
 def get_admin_user():
     """Создает тестового администратора."""
     user = User.objects.create(
@@ -13,6 +14,7 @@ def get_admin_user():
     user.set_password('qwerty')
     user.save()
     return user
+
 
 def get_member_user():
     """
@@ -30,6 +32,7 @@ def get_member_user():
     user.save()
     return user
 
+
 def get_test_section():
     """Создает тестовый раздел."""
     section = Section.objects.create(
@@ -37,6 +40,7 @@ def get_test_section():
         description='Test Description',
     )
     return section
+
 
 def get_test_content():
     """Создает тестовый контент, связанный с тестовым разделом."""

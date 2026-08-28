@@ -1,11 +1,6 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from sections.test_sections.utils import get_admin_user, get_member_user, get_test_section,get_test_content
-
-from rest_framework.test import APITestCase
-from rest_framework import status
-
 from sections.test_sections.utils import get_member_user, get_test_question
 
 
@@ -22,7 +17,9 @@ class QuestionTest(APITestCase):
             'password': 'qwerty'
         })
         self.access_token = response.json().get('access')
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')  # ✅ HTTP, а не HttpP
+        self.client.credentials(
+            # ✅ HTTP, а не HttpP
+            HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
 
         # Создание тестового вопроса
         self.question = get_test_question()
@@ -39,7 +36,8 @@ class QuestionTest(APITestCase):
 
         # Проверка данных (с учетом пагинации)
         response_data = response.json()
-        self.assertEqual(response_data['results'][0]['question'], 'Test Question')
+        self.assertEqual(response_data['results']
+                         [0]['question'], 'Test Question')
 
     def test_18_question_detail(self):
         """

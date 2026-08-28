@@ -1,13 +1,14 @@
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 
 from sections.models import Section, Content, Question
 from sections.permissions import IsModerator, IsSuperuser
 from sections.serializers.section_serializers import SectionSerializer, SectionListSerializer
-from sections.serializers.content_serializers import ContentSerializer, ContentSectionSerializer, ContentListSerializer
+from sections.serializers.content_serializers import ContentSerializer, ContentListSerializer
 from .serializers.question_serializers import QuestionSerializer, QuestionSectionSerializer
 from sections.paginators import SectionPagination, ContentPagination, QuestionPagination
+
 
 class SectionListAPIView(ListAPIView):
     """
@@ -59,6 +60,7 @@ class SectionDestroyAPIView(DestroyAPIView):
     queryset = Section.objects.all()
     permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
+
 class ContentListAPIView(ListAPIView):
     """
     Представление для получения списка всего контента.
@@ -79,6 +81,7 @@ class ContentCreateAPIView(CreateAPIView):
     serializer_class = ContentSerializer
     permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
+
 class ContentRetrieveAPIView(RetrieveAPIView):
     """
     Представление для просмотра детальной информации о конкретном контенте.
@@ -87,6 +90,7 @@ class ContentRetrieveAPIView(RetrieveAPIView):
     serializer_class = ContentSerializer
     queryset = Content.objects.all()
     permission_classes = (IsAuthenticated,)
+
 
 class ContentUpdateAPIView(UpdateAPIView):
     """
@@ -97,6 +101,7 @@ class ContentUpdateAPIView(UpdateAPIView):
     queryset = Content.objects.all()
     permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
 
+
 class ContentDestroyAPIView(DestroyAPIView):
     """
     Представление для удаления контента.
@@ -105,6 +110,7 @@ class ContentDestroyAPIView(DestroyAPIView):
     serializer_class = ContentSerializer
     queryset = Content.objects.all()
     permission_classes = (IsAuthenticated, IsModerator | IsSuperuser)
+
 
 class QuestionListAPIView(ListAPIView):
     """
@@ -116,6 +122,7 @@ class QuestionListAPIView(ListAPIView):
     queryset = Question.objects.all()
     permission_classes = (IsAuthenticated,)
     pagination_class = QuestionPagination
+
 
 class QuestionRetrieveAPIView(RetrieveAPIView):
     """

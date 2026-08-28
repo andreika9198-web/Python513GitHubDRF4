@@ -14,12 +14,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Question',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='description')),
-                ('question', models.TextField(blank=True, null=True, verbose_name='question')),
-                ('member_answer', models.TextField(blank=True, null=True, verbose_name='member_answer')),
-                ('answer', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='sections.content', verbose_name='answer')),
-                ('section', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sections.section', verbose_name='section')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('description', models.TextField(
+                    blank=True, null=True, verbose_name='description')),
+                ('question', models.TextField(
+                    blank=True, null=True, verbose_name='question')),
+                ('member_answer', models.TextField(
+                    blank=True, null=True, verbose_name='member_answer')),
+                ('answer', models.ForeignKey(blank=True, null=True,
+                 on_delete=django.db.models.deletion.CASCADE, to='sections.content', verbose_name='answer')),
+                ('section', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 to='sections.section', verbose_name='section')),
             ],
             options={
                 'verbose_name': 'Question',

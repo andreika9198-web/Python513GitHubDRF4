@@ -1,17 +1,21 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import Token
+
 
 from users.models import User
 from users.validators import PasswordValidator
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'last_name', 'first_name', 'phone_number', 'is_active')
+        fields = ('id', 'email', 'last_name', 'first_name',
+                  'phone_number', 'is_active')
+
 
 class UserCreateSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True, min_length=8, max_length=16)
+    password = serializers.CharField(
+        write_only=True, required=True, min_length=8, max_length=16)
 
     class Meta:
         model = User
@@ -28,10 +32,13 @@ class UserCreateSerializer(serializers.ModelSerializer):
         )
         return user
 
+
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'last_name', 'first_name', 'phone_number', 'is_active')
+        fields = ('email', 'last_name', 'first_name',
+                  'phone_number', 'is_active')
+
 
 class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
 

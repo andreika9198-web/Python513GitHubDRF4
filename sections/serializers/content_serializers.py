@@ -2,6 +2,8 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.relations import SlugRelatedField
 
 from sections.models import Section, Content
+
+
 class ContentSerializer(ModelSerializer):
     """
     Сериализатор для модели Content.
@@ -30,7 +32,8 @@ class ContentListSerializer(ModelSerializer):
     Используется для отображения списка всех материалов с указанием названия раздела.
     Возвращает ID, название раздела и заголовок контента.
     """
-    section = SlugRelatedField(slug_field='title', queryset=Section.objects.all())
+    section = SlugRelatedField(
+        slug_field='title', queryset=Section.objects.all())
 
     class Meta:
         model = Content

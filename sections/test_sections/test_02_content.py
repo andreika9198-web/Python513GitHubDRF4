@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from sections.test_sections.utils import get_admin_user, get_member_user,get_test_content
+from sections.test_sections.utils import get_admin_user, get_member_user, get_test_content
 
 
 class ContentTestAdmin(APITestCase):
@@ -17,7 +17,8 @@ class ContentTestAdmin(APITestCase):
             'password': 'qwerty'
         })
         self.access_token = response.json().get('access')
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
 
         # Создание тестового контента
         self.content = get_test_content()
@@ -32,14 +33,16 @@ class ContentTestAdmin(APITestCase):
             'title': 'Test Content Title Create',
             'content': 'Test Content Create',
         }
-        response = self.client.post('/content/create/', data=data, format='json')
+        response = self.client.post(
+            '/content/create/', data=data, format='json')
 
         # Проверка статуса ответа
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Проверка данных в ответе
         response_data = response.json()
-        self.assertEqual(response_data.get('title'), 'Test Content Title Create')
+        self.assertEqual(response_data.get('title'),
+                         'Test Content Title Create')
         self.assertEqual(response_data.get('content'), 'Test Content Create')
 
     def test_10_content_detail(self):
@@ -79,7 +82,8 @@ class ContentTestAdmin(APITestCase):
         self.assertEqual(response_data.get('title'), 'Test Title Update PATCH')
 
         # Проверка, что другие поля не изменились
-        self.assertEqual(response_data.get('content'), 'Test Content')  # Должно остаться прежним
+        self.assertEqual(response_data.get('content'),
+                         'Test Content')  # Должно остаться прежним
 
     def test_12_content_delete(self):
         """
@@ -106,7 +110,8 @@ class ContentTestAdmin(APITestCase):
 
         # Проверка данных (с учетом пагинации)
         response_data = response.json()
-        self.assertEqual(response_data['results'][0]['title'], 'Test Content Title')
+        self.assertEqual(response_data['results']
+                         [0]['title'], 'Test Content Title')
 
 
 class ContentTestMember(APITestCase):
@@ -122,7 +127,8 @@ class ContentTestMember(APITestCase):
             'password': 'qwerty'
         })
         self.access_token = response.json().get('access')
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
 
         # Создание тестового контента
         self.content = get_test_content()
@@ -138,7 +144,8 @@ class ContentTestMember(APITestCase):
             'content': 'Test Content Create',
         }
 
-        response = self.client.post('/content/create/', data=data, format='json')
+        response = self.client.post(
+            '/content/create/', data=data, format='json')
 
         # Проверка статуса
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

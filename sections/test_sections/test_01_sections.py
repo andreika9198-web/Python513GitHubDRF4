@@ -14,9 +14,11 @@ class SectionTestsAdmin(APITestCase):
         self.user = get_admin_user()
 
         # Получение JWT токена
-        response = self.client.post('/users/token/', {'email': self.user.email, 'password': 'qwerty'})
+        response = self.client.post(
+            '/users/token/', {'email': self.user.email, 'password': 'qwerty'})
         self.access_token = response.json().get('access')
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
 
         # Создание тестового раздела
         self.test_section = get_test_section()
@@ -30,14 +32,16 @@ class SectionTestsAdmin(APITestCase):
             'title': 'Test Section Create',
             'description': 'Test Description Create',
         }
-        response = self.client.post('/section/create/', data=data, format='json')
+        response = self.client.post(
+            '/section/create/', data=data, format='json')
 
         # Проверка статуса ответа
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Проверка данных в ответе
         self.assertEqual(response.json().get('title'), 'Test Section Create')
-        self.assertEqual(response.json().get('description'), 'Test Description Create')
+        self.assertEqual(response.json().get(
+            'description'), 'Test Description Create')
 
     def test_02_section_detail(self):
         """Тест получения детальной информации о разделе."""
@@ -70,12 +74,14 @@ class SectionTestsAdmin(APITestCase):
         # Проверка данных в ответе
         response_data = response.json()
         self.assertEqual(response_data.get('title'), 'Test Section Update PUT')
-        self.assertEqual(response_data.get('description'), 'Test Description Update PUT')
+        self.assertEqual(response_data.get('description'),
+                         'Test Description Update PUT')
 
     def test_04_section_delete(self):
         """Тест удаления раздела."""
         # Удаление раздела
-        response = self.client.delete(f'/section/{self.test_section.id}/delete/')
+        response = self.client.delete(
+            f'/section/{self.test_section.id}/delete/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
         # Проверка, что раздел удален
@@ -107,7 +113,9 @@ class SectionTestsMember(APITestCase):
             'password': 'qwerty'
         })
         self.access_token = response.json().get('access')
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')  # ✅ HTTP, а не Http
+        self.client.credentials(
+            # ✅ HTTP, а не Http
+            HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
 
         # Создание тестового раздела
         self.test_section = get_test_section()
@@ -121,13 +129,15 @@ class SectionTestsMember(APITestCase):
             'title': 'Test Section Create',
             'description': 'Test Description Create',
         }
-        response = self.client.post('/section/create/', data=data, format='json')
+        response = self.client.post(
+            '/section/create/', data=data, format='json')
 
         # Проверка статуса
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
         # Проверка сообщения об ошибке
-        self.assertEqual(response.json().get('detail'), 'У вас недостаточно прав для выполнения данного действия.')
+        self.assertEqual(response.json().get(
+            'detail'), 'У вас недостаточно прав для выполнения данного действия.')
 
     def test_07_section_update(self):
         """
@@ -159,7 +169,8 @@ class SectionTestsMember(APITestCase):
         Тест удаления раздела пользователем с ролью MEMBER.
         Ожидается ошибка 403 Forbidden (недостаточно прав).
         """
-        response = self.client.delete(f'/section/{self.test_section.id}/delete/')
+        response = self.client.delete(
+            f'/section/{self.test_section.id}/delete/')
 
         # Проверка статуса
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
